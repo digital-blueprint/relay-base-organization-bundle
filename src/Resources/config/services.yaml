@@ -1,33 +1,17 @@
 services:
-  Dbp\Relay\BaseBundle\Controller\:
+  Dbp\Relay\BaseOrganizationBundle\Controller\:
     resource: '../../Controller'
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\BaseBundle\API\OrganizationProviderInterface:
-    '@Dbp\Relay\BaseBundle\Service\DummyOrganizationProvider'
-
-  Dbp\Relay\BaseBundle\Service\DummyOrganizationProvider:
-    autowire: true
-    autoconfigure: true
-
-  Dbp\Relay\BaseBundle\Service\DummyPersonProvider:
-    autowire: true
-    autoconfigure: true
-
-  Dbp\Relay\BaseBundle\API\PersonProviderInterface:
-    '@Dbp\Relay\BaseBundle\Service\DummyPersonProvider'
-
-  Dbp\Relay\BaseBundle\DataProvider\:
+  Dbp\Relay\BaseOrganizationBundle\DataProvider\:
     resource: '../../DataProvider'
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\BaseBundle\Serializer\PersonAttributeNormalizer:
+  Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface:
+    '@Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationProvider'
+
+  Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationProvider:
     autowire: true
     autoconfigure: true
-
-  # This alias exist so we can replace the service during tests
-  test.PersonProviderInterface:
-    alias: 'Dbp\Relay\BaseBundle\API\PersonProviderInterface'
-    public: true

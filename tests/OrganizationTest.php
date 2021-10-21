@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\BaseBundle\Tests;
+namespace Dbp\Relay\BaseOrganizationBundle\Tests;
 
-use Dbp\Relay\BaseBundle\Entity\Organization;
+use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use PHPUnit\Framework\TestCase;
 
 class OrganizationTest extends TestCase

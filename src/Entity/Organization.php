@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\BaseBundle\Entity;
+namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Dbp\Relay\BaseBundle\Controller\GetOrganizationsByPerson;
+use Dbp\Relay\BaseOrganizationBundle\Controller\GetOrganizationsByPerson;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get" = {
  *             "path" = "/organizations",
  *             "openapi_context" = {
- *                 "tags" = {"Base"},
+ *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
  *                 }
@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "controller" = GetOrganizationsByPerson::class,
  *             "read" = false,
  *             "openapi_context" = {
- *                 "tags" = {"Base"},
+ *                 "tags" = {"BaseOrganization"},
  *                 "summary" = "Get the organizations related to a person.",
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Id of person", "required" = true, "type" = "string", "example" = "vlts01"},
@@ -40,7 +40,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         "get" = {
  *             "path" = "/organizations/{identifier}",
  *             "openapi_context" = {
- *                 "tags" = {"Base"},
+ *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "orgUnitID of organization", "required" = true, "type" = "string", "example" = "1190-F2050"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}

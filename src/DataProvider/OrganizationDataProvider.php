@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Dbp\Relay\BaseBundle\DataProvider;
+namespace Dbp\Relay\BaseOrganizationBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
-use Dbp\Relay\BaseBundle\API\OrganizationProviderInterface;
-use Dbp\Relay\BaseBundle\Entity\Organization;
+use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
+use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class OrganizationDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface

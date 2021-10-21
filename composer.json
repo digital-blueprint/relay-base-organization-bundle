@@ -1,11 +1,12 @@
 {
-    "name": "dbp/relay-base-bundle",
+    "name": "dbp/relay-base-organization-bundle",
     "type": "symfony-bundle",
     "license": "AGPL-3.0-or-later",
     "require": {
         "php": "^7.3",
         "ext-json": "*",
         "api-platform/core": "^2.6.3",
+        "dbp/relay-base-person-bundle": "^0.1.3",
         "dbp/relay-core-bundle": "^0.1.11",
         "guzzlehttp/guzzle": "^7.0",
         "nelmio/cors-bundle": "^2.1.0",
@@ -32,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Dbp\\Relay\\BaseBundle\\": "src/"
+            "Dbp\\Relay\\BaseOrganizationBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-          "Dbp\\Relay\\BaseBundle\\Tests\\": "tests/"
+          "Dbp\\Relay\\BaseOrganizationBundle\\Tests\\": "tests/"
         }
     },
     "config": {
