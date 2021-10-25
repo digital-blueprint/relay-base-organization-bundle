@@ -14,9 +14,9 @@ class ExtTest extends ApiTestCase
         $client = self::createClient();
 
         $endpoints = [
-            // FIXME: '/people/foo/organizations',
-            '/organizations',
-            '/organizations/foo',
+            '/base/people/foo/organizations',
+            '/base/organizations',
+            '/base/organizations/foo',
         ];
         foreach ($endpoints as $path) {
             $response = $client->request('GET', $path);

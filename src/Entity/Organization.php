@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={
  *         "get" = {
- *             "path" = "/organizations",
+ *             "path" = "/base/organizations",
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         },
  *         "get_orgs" = {
  *             "method" = "GET",
- *             "path" = "/people/{identifier}/organizations",
+ *             "path" = "/base/people/{identifier}/organizations",
  *             "controller" = GetOrganizationsByPerson::class,
  *             "read" = false,
  *             "openapi_context" = {
@@ -38,7 +38,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     },
  *     itemOperations={
  *         "get" = {
- *             "path" = "/organizations/{identifier}",
+ *             "path" = "/base/organizations/{identifier}",
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
@@ -49,6 +49,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *         },
  *     },
  *     iri="http://schema.org/Organization",
+ *     shortName="BaseOrganization",
  *     description="An organization",
  *     normalizationContext={
  *         "jsonld_embed_context" = true,
