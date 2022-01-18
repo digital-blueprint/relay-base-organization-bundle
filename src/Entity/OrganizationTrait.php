@@ -41,11 +41,9 @@ trait OrganizationTrait
      */
     private $alternateName;
 
-    public function setIdentifier(string $identifier): self
+    public function setIdentifier(string $identifier): void
     {
         $this->identifier = $identifier;
-
-        return $this;
     }
 
     public function getIdentifier(): ?string
@@ -58,11 +56,9 @@ trait OrganizationTrait
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function getAlternateName(): ?string
@@ -70,11 +66,9 @@ trait OrganizationTrait
         return $this->alternateName;
     }
 
-    public function setAlternateName(string $alternateName): self
+    public function setAlternateName(string $alternateName): void
     {
         $this->alternateName = $alternateName;
-
-        return $this;
     }
 
     public function getUrl(): ?string
@@ -82,10 +76,8 @@ trait OrganizationTrait
         return $this->url;
     }
 
-    public function setUrl(string $url): self
+    public function setUrl(string $url): void
     {
         $this->url = $url;
-
-        return $this;
     }
 }

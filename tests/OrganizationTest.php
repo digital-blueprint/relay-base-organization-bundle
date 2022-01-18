@@ -12,6 +12,11 @@ class OrganizationTest extends TestCase
     public function testBasics()
     {
         $org = new Organization();
+        $this->assertNull($org->getIdentifier());
+        $this->assertNull($org->getName());
+        $this->assertNull($org->getAlternateName());
+        $this->assertNull($org->getUrl());
+
         $org->setIdentifier('id');
         $this->assertSame('id', $org->getIdentifier());
         $org->setName('name');

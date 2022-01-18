@@ -57,7 +57,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  */
-class Organization
+class Organization implements OrganizationInterface
 {
     use OrganizationTrait;
 }
