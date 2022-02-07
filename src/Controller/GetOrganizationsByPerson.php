@@ -40,7 +40,7 @@ class GetOrganizationsByPerson extends AbstractController
         }
 
         $context = (string) $request->query->get('context', '');
-        $lang = (string) $request->query->get('lang', 'en');
+        $lang = (string) $request->query->get('lang', 'de');
         $orgs = $this->orgProvider->getOrganizationsByPerson($person, $context, $lang);
 
         $page = (int) $request->query->get('page', '1');
