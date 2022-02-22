@@ -40,8 +40,12 @@ class GetOrganizationsByPerson extends AbstractController
         }
 
         $context = (string) $request->query->get('context', '');
-        $lang = (string) $request->query->get('lang', 'de');
-        $orgs = $this->orgProvider->getOrganizationsByPerson($person, $context, $lang);
+
+        $options = [];
+        $lang = $request->query->get('lang', 'de');
+        $options['lang'] = $lang;
+
+        $orgs = $this->orgProvider->getOrganizationsByPerson($person, $context, $options);
 
         $page = (int) $request->query->get('page', '1');
         $perPage = (int) $request->query->get('perPage', (string) self::ITEMS_PER_PAGE);

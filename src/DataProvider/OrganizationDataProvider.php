@@ -29,10 +29,10 @@ final class OrganizationDataProvider extends AbstractController implements ItemD
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         assert(is_string($id));
-        $filters = $context['filters'] ?? [];
-        $lang = $filters['lang'] ?? 'de';
-        $organization = $this->api->getOrganizationById($id, $lang);
 
-        return $organization;
+        $filters = $context['filters'] ?? [];
+        $options = ['lang' => $filters['lang'] ?? 'de'];
+
+        return $this->api->getOrganizationById($id, $options);
     }
 }

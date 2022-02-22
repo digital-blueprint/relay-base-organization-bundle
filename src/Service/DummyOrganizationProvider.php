@@ -10,28 +10,35 @@ use Dbp\Relay\BasePersonBundle\Entity\Person;
 
 class DummyOrganizationProvider implements OrganizationProviderInterface
 {
-    public function getOrganizationById(string $identifier, string $lang): Organization
+    public function getOrganizationById(string $identifier, array $options = []): ?Organization
     {
         $org = new Organization();
         $org->setIdentifier($identifier);
         $org->setName('Example Organization');
-        $org->setAlternateName('F1234');
         $org->setUrl('https://example.com');
 
         return $org;
     }
 
-    public function getOrganizationsByPerson(Person $person, string $context, string $lang): array
+    public function getOrganizationsByPerson(Person $person, string $context, array $options = []): array
     {
-        $org = $this->getOrganizationById($context, $lang);
+        $orgs = [];
+        $org = $this->getOrganizationById('foo', $options);
+        if ($org !== null) {
+            $orgs[] = $org;
+        }
 
-        return [$org];
+        return $orgs;
     }
 
-    public function getOrganizations(string $lang): array
+    public function getOrganizations(array $options = []): array
     {
-        $org = $this->getOrganizationById('1234', $lang);
+        $orgs = [];
+        $org = $this->getOrganizationById('foo', $options);
+        if ($org !== null) {
+            $orgs[] = $org;
+        }
 
-        return [$org];
+        return $orgs;
     }
 }

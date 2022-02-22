@@ -31,7 +31,7 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filters = $context['filters'] ?? [];
-        $lang = $filters['lang'] ?? 'de';
+        $options = ['lang' => $filters['lang'] ?? 'de'];
 
         $perPage = self::ITEMS_PER_PAGE;
         $page = 1;
@@ -43,7 +43,7 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         if (isset($context['filters']['perPage'])) {
             $perPage = (int) $context['filters']['perPage'];
         }
-        $orgs = $this->api->getOrganizations($lang);
+        $orgs = $this->api->getOrganizations($options);
 
         return new ArrayFullPaginator($orgs, $page, $perPage);
     }

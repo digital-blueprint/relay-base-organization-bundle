@@ -33,14 +33,6 @@ trait OrganizationTrait
      */
     private $url;
 
-    /**
-     * @Groups({"BaseOrganization:output"})
-     * @ApiProperty(iri="https://schema.org/alternateName")
-     *
-     * @var string
-     */
-    private $alternateName;
-
     public function setIdentifier(string $identifier): void
     {
         $this->identifier = $identifier;
@@ -59,16 +51,6 @@ trait OrganizationTrait
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    public function getAlternateName(): ?string
-    {
-        return $this->alternateName;
-    }
-
-    public function setAlternateName(string $alternateName): void
-    {
-        $this->alternateName = $alternateName;
     }
 
     public function getUrl(): ?string
