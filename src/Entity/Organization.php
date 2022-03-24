@@ -44,6 +44,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "orgUnitID of organization", "required" = true, "type" = "string", "example" = "1190-F2050"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include ", "type" = "string", "example" = "localData"}
  *                 }
  *             }
  *         },
