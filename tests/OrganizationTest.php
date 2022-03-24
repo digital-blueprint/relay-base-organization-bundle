@@ -14,13 +14,10 @@ class OrganizationTest extends TestCase
         $org = new Organization();
         $this->assertNull($org->getIdentifier());
         $this->assertNull($org->getName());
-        $this->assertNull($org->getUrl());
 
         $org->setIdentifier('id');
         $this->assertSame('id', $org->getIdentifier());
         $org->setName('name');
         $this->assertSame('name', $org->getName());
-        $org->setUrl('url');
-        $this->assertSame('url', $org->getUrl());
     }
 }

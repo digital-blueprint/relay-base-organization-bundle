@@ -15,7 +15,6 @@ class DummyOrganizationProvider implements OrganizationProviderInterface
         $org = new Organization();
         $org->setIdentifier($identifier);
         $org->setName('Example Organization');
-        $org->setUrl('https://example.com');
 
         return $org;
     }

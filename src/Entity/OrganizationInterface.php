@@ -13,8 +13,4 @@ interface OrganizationInterface
     public function getName(): ?string;
 
     public function setName(string $name): void;
-
-    public function getUrl(): ?string;
-
-    public function setUrl(string $url): void;
 }
