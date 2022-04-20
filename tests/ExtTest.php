@@ -14,7 +14,6 @@ class ExtTest extends ApiTestCase
         $client = self::createClient();
 
         $endpoints = [
-            '/base/people/foo/organizations',
             '/base/organizations',
             '/base/organizations/foo',
         ];

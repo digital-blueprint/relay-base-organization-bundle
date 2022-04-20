@@ -6,7 +6,6 @@ namespace Dbp\Relay\BaseOrganizationBundle\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle;
 use Dbp\Relay\BaseOrganizationBundle\DbpRelayBaseOrganizationBundle;
-use Dbp\Relay\BasePersonBundle\DbpRelayBasePersonBundle;
 use Dbp\Relay\CoreBundle\DbpRelayCoreBundle;
 use Nelmio\CorsBundle\NelmioCorsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -30,7 +29,6 @@ class Kernel extends BaseKernel
         yield new NelmioCorsBundle();
         yield new MonologBundle();
         yield new ApiPlatformBundle();
-        yield new DbpRelayBasePersonBundle();
         yield new DbpRelayBaseOrganizationBundle();
         yield new DbpRelayCoreBundle();
     }
