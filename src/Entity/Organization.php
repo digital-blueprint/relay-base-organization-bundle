@@ -29,7 +29,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "1190"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "localData"}
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "BaseOrganization.code"}
  *                 }
  *             }
  *         },
