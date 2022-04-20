@@ -6,7 +6,6 @@ namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 trait OrganizationTrait
 {
@@ -52,34 +51,5 @@ trait OrganizationTrait
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    public function getLocalData(): array
-    {
-        return $this->localData;
-    }
-
-    /**
-     * Allows attaching local data to a Course object.
-     *
-     * @param ?mixed $value
-     */
-    public function setLocalDataValue(string $key, $value): void
-    {
-        if (!$this->localData) {
-            $this->localData = [];
-        }
-        $this->localData[$key] = $value;
-    }
-
-    /**
-     * @Ignore
-     * Gets local data from a Course object.
-     *
-     * @return ?mixed
-     */
-    public function getLocalDataValue(string $key)
-    {
-        return $this->localData ? ($this->localData[$key] ?? null) : null;
     }
 }

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
+use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
 
 /**
  * @ApiResource(
@@ -38,11 +39,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     description="An organization",
  *     normalizationContext={
  *         "jsonld_embed_context" = true,
- *         "groups" = {"BaseOrganization:output"}
+ *         "groups" = {"BaseOrganization:output", "LocalData:output"}
  *     }
  * )
  */
-class Organization implements OrganizationInterface
+class Organization implements OrganizationInterface, LocalDataAwareInterface
 {
+    use LocalDataAwareTrait;
     use OrganizationTrait;
 }
