@@ -16,7 +16,9 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
- *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"}
+ *                     {"name" = "person", "in" = "query", "description" = "Get organizations of a person (ID of BasePerson resource)", "required" = false, "type" = "string", "example" = "woody007"},
+ *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
+ *                     {"name" = "include", "in" = "query", "description" = "Optional resources to include", "type" = "string", "example" = "BaseOrganization.code"}
  *                 }
  *             }
  *         }

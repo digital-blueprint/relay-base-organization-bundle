@@ -7,18 +7,27 @@ namespace Dbp\Relay\BaseOrganizationBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
+use Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
+use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 final class OrganizationCollectionDataProvider extends AbstractController implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     public const ITEMS_PER_PAGE = 250;
-    private $api;
 
-    public function __construct(OrganizationProviderInterface $api)
+    /** @var OrganizationProviderInterface */
+    private $organizationProvider;
+
+    /** @var OrganizationsByPersonProviderInterface */
+    private $organizationsByPersonProvider;
+
+    public function __construct(OrganizationProviderInterface $organizationProvider, OrganizationsByPersonProviderInterface $organizationsByPersonProvider)
     {
-        $this->api = $api;
+        $this->organizationProvider = $organizationProvider;
+        $this->organizationsByPersonProvider = $organizationsByPersonProvider;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
@@ -33,9 +42,26 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $filters = $context['filters'] ?? [];
         $options = ['lang' => $filters['lang'] ?? 'de'];
 
+        if ($include = ($filters['include'] ?? null)) {
+            $options['include'] = $include;
+        }
+
+        $personId = $filters['person'] ?? null;
+        if (!empty($personId)) {
+            if ($personId !== $this->getUser()->getUserIdentifier()) {
+                throw new ApiError(Response::HTTP_UNAUTHORIZED, 'only allowed with ID of currently logged-in person');
+            }
+
+            $organizations = [];
+            foreach ($this->organizationsByPersonProvider->getOrganizationsByPerson($personId, $options) as $organizationId) {
+                $organizations[] = $this->organizationProvider->getOrganizationById($organizationId, $options);
+            }
+        } else {
+            $organizations = $this->organizationProvider->getOrganizations($options);
+        }
+
         $perPage = self::ITEMS_PER_PAGE;
         $page = 1;
-
         if (isset($context['filters']['page'])) {
             $page = (int) $context['filters']['page'];
         }
@@ -43,8 +69,7 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         if (isset($context['filters']['perPage'])) {
             $perPage = (int) $context['filters']['perPage'];
         }
-        $orgs = $this->api->getOrganizations($options);
 
-        return new ArrayFullPaginator($orgs, $page, $perPage);
+        return new ArrayFullPaginator($organizations, $page, $perPage);
     }
 }
