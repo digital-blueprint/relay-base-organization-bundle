@@ -173,7 +173,7 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle",
-                "reference": "4ede1874cf2f75680fdf0aa839ee358f4c3a4b5d"
+                "reference": "d26c15b56035d0fc4277a8b6e1f49148b1c7653e"
             },
             "require": {
                 "api-platform/core": "^2.6.6",
@@ -234,7 +234,7 @@
                 "AGPL-3.0-or-later"
             ],
             "description": "The core bundle of the Relay API gateway",
-            "time": "2022-04-21T13:52:29+00:00"
+            "time": "2022-04-23T00:26:01+00:00"
         },
         {
             "name": "doctrine/annotations",
