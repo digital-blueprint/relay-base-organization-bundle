@@ -11,6 +11,7 @@ use Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
+use Dbp\Relay\CoreBundle\LocalData\LocalData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,11 +41,9 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filters = $context['filters'] ?? [];
-        $options = ['lang' => $filters['lang'] ?? 'de'];
 
-        if ($include = ($filters['include'] ?? null)) {
-            $options['include'] = $include;
-        }
+        $options = ['lang' => $filters['lang'] ?? 'de'];
+        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
         $personId = $filters['person'] ?? null;
         if (!empty($personId)) {

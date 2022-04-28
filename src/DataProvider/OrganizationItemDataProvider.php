@@ -8,9 +8,10 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
+use Dbp\Relay\CoreBundle\LocalData\LocalData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-final class OrganizationDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface
+final class OrganizationItemDataProvider extends AbstractController implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     private $api;
 
@@ -32,10 +33,7 @@ final class OrganizationDataProvider extends AbstractController implements ItemD
 
         $options = [];
         $options['lang'] = $filters['lang'] ?? 'de';
-
-        if ($include = ($filters['include'] ?? null)) {
-            $options['include'] = $include;
-        }
+        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
         return $this->api->getOrganizationById($id, $options);
     }
