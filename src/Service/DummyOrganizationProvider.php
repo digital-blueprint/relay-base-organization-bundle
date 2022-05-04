@@ -9,7 +9,7 @@ use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 
 class DummyOrganizationProvider implements OrganizationProviderInterface
 {
-    public function getOrganizationById(string $identifier, array $options = []): ?Organization
+    public function getOrganizationById(string $identifier, array $options = []): Organization
     {
         $org = new Organization();
         $org->setIdentifier($identifier);
@@ -20,12 +20,6 @@ class DummyOrganizationProvider implements OrganizationProviderInterface
 
     public function getOrganizations(array $options = []): array
     {
-        $orgs = [];
-        $org = $this->getOrganizationById('foo', $options);
-        if ($org !== null) {
-            $orgs[] = $org;
-        }
-
-        return $orgs;
+        return [$this->getOrganizationById('foo', $options)];
     }
 }
