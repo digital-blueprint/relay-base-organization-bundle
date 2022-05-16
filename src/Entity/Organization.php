@@ -18,7 +18,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "parameters" = {
  *                     {"name" = "person", "in" = "query", "description" = "Get organizations of a person (ID of BasePerson resource)", "required" = false, "type" = "string", "example" = "woody007"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attrubutes to include", "type" = "string", "example" = "BaseOrganization.code"}
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseOrganization.code"}
  *                 }
  *             }
  *         }
