@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseOrganizationBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
+use ApiPlatform\Core\DataProvider\PaginatorInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
-use Dbp\Relay\CoreBundle\Helpers\ArrayFullPaginator;
 use Dbp\Relay\CoreBundle\LocalData\LocalData;
+use Dbp\Relay\CoreBundle\Pagination\Pagination;
+use Dbp\Relay\CoreBundle\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 final class OrganizationCollectionDataProvider extends AbstractController implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    public const ITEMS_PER_PAGE = 250;
+    public const MAX_ITEMS_PER_PAGE = 250;
 
     /** @var OrganizationProviderInterface */
     private $organizationProvider;
@@ -36,7 +38,7 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         return Organization::class === $resourceClass;
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): ArrayFullPaginator
+    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): Paginator
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -45,30 +47,32 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $options = ['lang' => $filters['lang'] ?? 'de'];
         $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
-        $personId = $filters['person'] ?? null;
-        if (!empty($personId)) {
+        Pagination::addPaginationOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
+
+        dump($filters);
+        dump($options);
+
+        $personId = $filters['person'] ?? '';
+        if ($personId !== '') {
             if ($personId !== $this->getUser()->getUserIdentifier()) {
                 throw new ApiError(Response::HTTP_UNAUTHORIZED, 'only allowed with ID of currently logged-in person');
             }
 
             $organizations = [];
-            foreach ($this->organizationsByPersonProvider->getOrganizationsByPerson($personId, $options) as $organizationId) {
+            $orgIdPaginator = $this->organizationsByPersonProvider->getOrganizationsByPerson($personId, $options);
+            foreach ($orgIdPaginator as $organizationId) {
                 $organizations[] = $this->organizationProvider->getOrganizationById($organizationId, $options);
             }
+
+            if ($orgIdPaginator instanceof PaginatorInterface) {
+                $paginator = Pagination::createFullPaginator($organizations, $options, intval($orgIdPaginator->getTotalItems()));
+            } else {
+                $paginator = Pagination::createPartialPaginator($organizations, $options);
+            }
         } else {
-            $organizations = $this->organizationProvider->getOrganizations($options);
+            $paginator = $this->organizationProvider->getOrganizations($options);
         }
 
-        $perPage = self::ITEMS_PER_PAGE;
-        $page = 1;
-        if (isset($context['filters']['page'])) {
-            $page = (int) $context['filters']['page'];
-        }
-
-        if (isset($context['filters']['perPage'])) {
-            $perPage = (int) $context['filters']['perPage'];
-        }
-
-        return new ArrayFullPaginator($organizations, $page, $perPage);
+        return $paginator;
     }
 }

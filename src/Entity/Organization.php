@@ -13,12 +13,15 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *     collectionOperations={
  *         "get" = {
  *             "path" = "/base/organizations",
+ *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
+ *             "pagination_client_partial" = true,
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "person", "in" = "query", "description" = "Get organizations of a person (ID of BasePerson resource)", "required" = false, "type" = "string", "example" = "woody007"},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
- *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseOrganization.code"}
+ *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseOrganization.code"},
+ *                     {"name" = "partialPagination", "in" = "query", "description" = "Enable partial pagination", "type" = "bool", "example" = "false"}
  *                 }
  *             }
  *         }
@@ -26,6 +29,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *     itemOperations={
  *         "get" = {
  *             "path" = "/base/organizations/{identifier}",
+ *             "security" = "is_granted('IS_AUTHENTICATED_FULLY')",
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
@@ -49,4 +53,6 @@ class Organization implements OrganizationInterface, LocalDataAwareInterface
 {
     use LocalDataAwareTrait;
     use OrganizationTrait;
+
+    public const SEARCH_PARAMETER_NAME = 'search';
 }

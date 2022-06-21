@@ -6,6 +6,7 @@ namespace Dbp\Relay\BaseOrganizationBundle\API;
 
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
+use Dbp\Relay\CoreBundle\Pagination\Paginator;
 
 interface OrganizationProviderInterface
 {
@@ -15,9 +16,7 @@ interface OrganizationProviderInterface
     public function getOrganizationById(string $identifier, array $options = []): Organization;
 
     /**
-     * @return Organization[]
-     *
      * @throws ApiError
      */
-    public function getOrganizations(array $options = []): array;
+    public function getOrganizations(array $options = []): Paginator;
 }

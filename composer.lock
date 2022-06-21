@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c6142b1fe60dcd06759a3906423e05b",
+    "content-hash": "695dca37da4b00e7151972631f120382",
     "packages": [
         {
             "name": "api-platform/core",
@@ -169,11 +169,11 @@
         },
         {
             "name": "dbp/relay-core-bundle",
-            "version": "v0.1.36",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.tugraz.at/dbp/relay/dbp-relay-core-bundle",
-                "reference": "e271903213daaf1ae2b1f144ac39df05bf6627cc"
+                "reference": "e864d418ccc384e132525e7fc3db4c44ebd3fd65"
             },
             "require": {
                 "api-platform/core": "^2.6.6",
@@ -215,6 +215,7 @@
                 "symfony/phpunit-bridge": "^5.3",
                 "vimeo/psalm": "^4.4"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "hooks": {
@@ -233,7 +234,7 @@
                 "AGPL-3.0-or-later"
             ],
             "description": "The core bundle of the Relay API gateway",
-            "time": "2022-05-11T08:49:59+00:00"
+            "time": "2022-06-15T10:07:48+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -9997,9 +9998,18 @@
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "dbp/relay-core-bundle",
+            "version": "dev-main",
+            "alias": "0.1.36",
+            "alias_normalized": "0.1.36.0"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "dbp/relay-core-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -10010,5 +10020,5 @@
     "platform-overrides": {
         "php": "7.3"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
