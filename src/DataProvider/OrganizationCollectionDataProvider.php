@@ -47,10 +47,11 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $options = ['lang' => $filters['lang'] ?? 'de'];
         $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
-        Pagination::addPaginationOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
+        if ($search = ($filters['search'] ?? null)) {
+            $options['search'] = $search;
+        }
 
-        dump($filters);
-        dump($options);
+        Pagination::addPaginationOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
 
         $personId = $filters['person'] ?? '';
         if ($personId !== '') {
