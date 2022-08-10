@@ -45,14 +45,15 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $filters = $context['filters'] ?? [];
 
         $options = ['lang' => $filters['lang'] ?? 'de'];
-        $options[LocalData::INCLUDE_PARAMETER_NAME] = LocalData::getIncludeParameter($filters);
 
         if ($search = ($filters['search'] ?? null)) {
             $options['search'] = $search;
         }
 
-        Pagination::addPaginationOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
+        LocalData::addOptions($options, $filters);
+        Pagination::addOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
 
+        // TODO: make 'person' a local query parameter and move filter implementation to connector (CAUTION: might break existing apps)
         $personId = $filters['person'] ?? '';
         if ($personId !== '') {
             if ($personId !== $this->getUser()->getUserIdentifier()) {
