@@ -18,7 +18,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *             "openapi_context" = {
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
- *                     {"name" = "search", "in" = "query", "description" = "Search for an organization", "type" = "string", "required" = false},
+ *                     {"name" = "search", "in" = "query", "description" = "Search filter (partial, case-insensitive text search on 'name' attribute)", "type" = "string", "required" = false},
  *                     {"name" = "person", "in" = "query", "description" = "Get organizations of a person (ID of BasePerson resource)", "type" = "string", "required" = false},
  *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
