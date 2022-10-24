@@ -19,8 +19,7 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "search", "in" = "query", "description" = "Search filter (partial, case-insensitive text search on 'name' attribute)", "type" = "string", "required" = false},
- *                     {"name" = "person", "in" = "query", "description" = "Get organizations of a person (ID of BasePerson resource)", "type" = "string", "required" = false},
- *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
+ *                     {"name" = "person", "in" = "query", "description" = "DEPRECATE: Get organizations of a person (ID of BasePerson resource)", "type" = "string", "required" = false},
  *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
  *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseOrganization.code"},
  *                     {"name" = "partialPagination", "in" = "query", "description" = "Partial pagination", "type" = "bool", "example" = "false"}
@@ -36,7 +35,6 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "identifier", "in" = "path", "description" = "Resource identifier", "required" = true, "type" = "string", "example" = "1190"},
- *                     {"name" = "lang", "in" = "query", "description" = "Language of result", "type" = "string", "enum" = {"de", "en"}, "example" = "de"},
  *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "BaseOrganization.code"}
  *                 }
  *             }

@@ -11,6 +11,7 @@ use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Exception\ApiError;
+use Dbp\Relay\CoreBundle\Helpers\Locale;
 use Dbp\Relay\CoreBundle\LocalData\LocalData;
 use Dbp\Relay\CoreBundle\Pagination\Pagination;
 use Dbp\Relay\CoreBundle\Pagination\Paginator;
@@ -27,9 +28,13 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
     /** @var OrganizationsByPersonProviderInterface */
     private $organizationsByPersonProvider;
 
-    public function __construct(OrganizationProviderInterface $organizationProvider, OrganizationsByPersonProviderInterface $organizationsByPersonProvider)
+    /** @var Locale */
+    private $locale;
+
+    public function __construct(OrganizationProviderInterface $organizationProvider, Locale $locale, OrganizationsByPersonProviderInterface $organizationsByPersonProvider)
     {
         $this->organizationProvider = $organizationProvider;
+        $this->locale = $locale;
         $this->organizationsByPersonProvider = $organizationsByPersonProvider;
     }
 
@@ -43,8 +48,7 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filters = $context['filters'] ?? [];
-
-        $options = ['lang' => $filters['lang'] ?? 'de'];
+        $options = [];
 
         if ($search = ($filters['search'] ?? null)) {
             $options['search'] = $search;
@@ -53,7 +57,15 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         LocalData::addOptions($options, $filters);
         Pagination::addOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
 
-        // TODO: make 'person' a local query parameter and move filter implementation to connector (CAUTION: might break existing apps)
+        // @deprecate 'lang' filter is deprecate, use 'Accept-Language' header instead
+        if (($lang = $filters['lang'] ?? null) !== null) {
+            $options[Locale::LANGUAGE_OPTION] = $lang;
+        } else {
+            $this->locale->addLanguageOption($options);
+        }
+
+        //-------------------------------------------------------------------------
+        // @deprecate The 'person' filter is deprecate. Use the 'identifiers' filter in your custom organizations wrapper.
         $personId = $filters['person'] ?? '';
         if ($personId !== '') {
             if ($personId !== $this->getUser()->getUserIdentifier()) {
@@ -67,14 +79,13 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
             }
 
             if ($orgIdPaginator instanceof PaginatorInterface) {
-                $paginator = Pagination::createFullPaginator($organizations, $options, intval($orgIdPaginator->getTotalItems()));
+                return Pagination::createFullPaginator($organizations, $options, intval($orgIdPaginator->getTotalItems()));
             } else {
-                $paginator = Pagination::createPartialPaginator($organizations, $options);
+                return Pagination::createPartialPaginator($organizations, $options);
             }
-        } else {
-            $paginator = $this->organizationProvider->getOrganizations($options);
         }
+        //-------------------------------------------------------------------------
 
-        return $paginator;
+        return $this->organizationProvider->getOrganizations($options);
     }
 }
