@@ -55,6 +55,8 @@ final class OrganizationCollectionDataProvider extends AbstractController implem
         }
 
         LocalData::addOptions($options, $filters);
+
+        $filters['partialPagination'] = true;
         Pagination::addOptions($options, $filters, self::MAX_ITEMS_PER_PAGE);
 
         // @deprecate 'lang' filter is deprecate, use 'Accept-Language' header instead
