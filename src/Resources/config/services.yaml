@@ -1,6 +1,5 @@
 services:
-  Dbp\Relay\BaseOrganizationBundle\DataProvider\:
-    resource: '../../DataProvider'
+  Dbp\Relay\BaseOrganizationBundle\DataProvider\OrganizationDataProvider:
     autowire: true
     autoconfigure: true
 
