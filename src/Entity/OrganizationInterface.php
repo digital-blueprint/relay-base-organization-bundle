@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
-interface OrganizationInterface
+use Dbp\Relay\CoreBundle\Entity\NamedEntityInterface;
+
+interface OrganizationInterface extends NamedEntityInterface
 {
     public function setIdentifier(string $identifier): void;
 
