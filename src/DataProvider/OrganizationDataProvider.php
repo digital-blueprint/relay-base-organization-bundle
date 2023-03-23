@@ -8,10 +8,7 @@ use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\DataProvider\AbstractDataProvider;
-use Dbp\Relay\CoreBundle\Exception\ApiError;
 use Dbp\Relay\CoreBundle\Locale\Locale;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Response;
 
 class OrganizationDataProvider extends AbstractDataProvider
 {
@@ -21,14 +18,10 @@ class OrganizationDataProvider extends AbstractDataProvider
     /** @var OrganizationsByPersonProviderInterface */
     private $organizationsByPersonProvider;
 
-    /** @var RequestStack */
-    private $requestStack;
-
-    public function __construct(OrganizationProviderInterface $organizationProvider, OrganizationsByPersonProviderInterface $organizationsByPersonProvider, RequestStack $requestStack)
+    public function __construct(OrganizationProviderInterface $organizationProvider, OrganizationsByPersonProviderInterface $organizationsByPersonProvider)
     {
         $this->organizationProvider = $organizationProvider;
         $this->organizationsByPersonProvider = $organizationsByPersonProvider;
-        $this->requestStack = $requestStack;
     }
 
     protected function getResourceClass(): string
@@ -36,12 +29,16 @@ class OrganizationDataProvider extends AbstractDataProvider
         return Organization::class;
     }
 
-    protected function getItemById($id, array $options = []): object
+    protected function isUserGrantedOperationAccess(int $operation): bool
+    {
+        return $this->isUserAuthenticated();
+    }
+
+    protected function getItemById($id, array $filters = [], array $options = []): object
     {
         //-------------------------------------------------------------------------
         // @deprecate 'lang' query parameter is deprecate, use 'Accept-Language' header instead
-        $queryParameters = $this->requestStack->getCurrentRequest()->query->all();
-        $this->tryAddDeprecatedLangQueryParameter($options, $queryParameters);
+        $this->tryAddDeprecatedLangQueryParameter($options, $filters);
         //-------------------------------------------------------------------------
 
         return $this->organizationProvider->getOrganizationById($id, $options);
@@ -58,10 +55,6 @@ class OrganizationDataProvider extends AbstractDataProvider
         // @deprecate The 'person' filter is deprecate. Use the 'identifiers' filter in your custom organization wrapper.
         $personId = $filters['person'] ?? '';
         if ($personId !== '') {
-            if ($personId !== $this->getUser()->getUserIdentifier()) {
-                throw new ApiError(Response::HTTP_UNAUTHORIZED, 'only allowed with ID of currently logged-in person');
-            }
-
             $organizations = [];
             foreach ($this->organizationsByPersonProvider->getOrganizationsByPerson($personId, $options) as $organizationId) {
                 $organizations[] = $this->organizationProvider->getOrganizationById($organizationId, $options);

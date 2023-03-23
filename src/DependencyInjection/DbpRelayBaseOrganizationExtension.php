@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\DependencyInjection;
 
+use Dbp\Relay\BaseOrganizationBundle\DataProvider\OrganizationDataProvider;
 use Dbp\Relay\CoreBundle\Extension\ExtensionTrait;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,5 +24,8 @@ class DbpRelayBaseOrganizationExtension extends ConfigurableExtension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yaml');
+
+        $defintion = $container->getDefinition(OrganizationDataProvider::class);
+        $defintion->addMethodCall('setConfig', [$mergedConfig]);
     }
 }
