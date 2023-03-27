@@ -19,7 +19,6 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *                 "tags" = {"BaseOrganization"},
  *                 "parameters" = {
  *                     {"name" = "search", "in" = "query", "description" = "Search filter (partial, case-insensitive text search on 'name' attribute)", "type" = "string", "required" = false},
- *                     {"name" = "person", "in" = "query", "description" = "DEPRECATED: Get organizations of a person (ID of BasePerson resource)", "type" = "string", "required" = false},
  *                     {"name" = "queryLocal", "in" = "query", "description" = "Local query parameters to apply", "type" = "string"},
  *                     {"name" = "includeLocal", "in" = "query", "description" = "Local data attributes to include", "type" = "string", "example" = "code"}
  *                 }
