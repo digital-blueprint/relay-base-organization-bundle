@@ -1,6 +1,6 @@
 # DbpRelayBaseOrganizationBundle
 
-[GitLab](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-organization-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-base-organization-bundle)
+[GitHub](https://github.com/digital-blueprint/relay-base-organization-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-base-organization-bundle)
 
 ## Integration into the Relay API Server
 
@@ -24,7 +24,7 @@ Dbp\Relay\CoreBundle\DbpRelayCoreBundle => ['all' => true],
 ## OrganizationProvider service
 
 For services that need to fetch organizations you need to create a service that implements
-[OrganizationProviderInterface](https://gitlab.tugraz.at/dbp/relay/dbp-relay-base-organization-bundle/-/blob/main/src/API/OrganizationProviderInterface.php)
+[OrganizationProviderInterface](https://github.com/digital-blueprint/relay-base-organization-bundle/blob/main/src/API/OrganizationProviderInterface.php)
 in your application.
 
 ### Example
