@@ -2,6 +2,8 @@
 
 [GitHub](https://github.com/digital-blueprint/relay-base-organization-bundle) | [Packagist](https://packagist.org/packages/dbp/relay-base-organization-bundle)
 
+[![Test](https://github.com/digital-blueprint/relay-base-organization-bundle/actions/workflows/test.yml/badge.svg)](https://github.com/digital-blueprint/relay-base-organization-bundle/actions/workflows/test.yml)
+
 ## Integration into the Relay API Server
 
 * Add the bundle package as a dependency:
