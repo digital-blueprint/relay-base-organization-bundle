@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -47,10 +49,53 @@ use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
  *     }
  * )
  */
-class Organization implements OrganizationInterface, LocalDataAwareInterface
+class Organization implements LocalDataAwareInterface
 {
     use LocalDataAwareTrait;
-    use OrganizationTrait;
 
     public const SEARCH_PARAMETER_NAME = 'search';
+
+    /**
+     * @ApiProperty(identifier=true)
+     * @Groups({"BaseOrganization:output"})
+     *
+     * @var string
+     */
+    private $identifier;
+
+    /**
+     * @ApiProperty(iri="https://schema.org/name")
+     * @Groups({"BaseOrganization:output"})
+     *
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @ApiProperty(iri="https://schema.org/additionalProperty")
+     * @Groups({"BaseCourse:output"})
+     *
+     * @var array
+     */
+    private $localData;
+
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
 }
