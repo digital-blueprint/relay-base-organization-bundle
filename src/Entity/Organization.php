@@ -6,6 +6,7 @@ namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Dbp\Relay\CoreBundle\Entity\NamedEntityInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -49,7 +50,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  * )
  */
-class Organization implements LocalDataAwareInterface
+class Organization implements LocalDataAwareInterface, NamedEntityInterface
 {
     use LocalDataAwareTrait;
 
