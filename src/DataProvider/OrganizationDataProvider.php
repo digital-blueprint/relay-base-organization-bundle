@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseOrganizationBundle\DataProvider;
 
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
-use Dbp\Relay\CoreBundle\ApiPlatform\State\AbstractStateProvider;
+use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
-class OrganizationDataProvider extends AbstractStateProvider
+class OrganizationDataProvider extends AbstractDataProvider
 {
     /** @var OrganizationProviderInterface */
     private $organizationProvider;
 
     public function __construct(OrganizationProviderInterface $organizationProvider)
     {
+        parent::__construct();
+
         $this->organizationProvider = $organizationProvider;
     }
 
@@ -22,7 +24,7 @@ class OrganizationDataProvider extends AbstractStateProvider
         return $this->isAuthenticated();
     }
 
-    protected function getItemById($id, array $filters = [], array $options = []): object
+    protected function getItemById(string $id, array $filters = [], array $options = []): object
     {
         return $this->organizationProvider->getOrganizationById($id, $options);
     }
