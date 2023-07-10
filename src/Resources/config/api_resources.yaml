@@ -33,10 +33,6 @@ resources:
               description: 'Local data attributes to include'
               type: string
               example: 'code'
-            - name: queryLocal
-              in: query
-              description: 'Local query parameters to apply'
-              type: string
 
     properties:
       identifier:
