@@ -8,6 +8,9 @@ use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
+/**
+ * @extends AbstractDataProvider<Organization>
+ */
 class OrganizationDataProvider extends AbstractDataProvider
 {
     /** @var OrganizationProviderInterface */
