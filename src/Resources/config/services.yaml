@@ -7,12 +7,5 @@ services:
     autowire: true
     autoconfigure: true
 
-  Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationsByPersonProvider:
-    autowire: true
-    autoconfigure: true
-
   Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface:
     '@Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationProvider'
-
-  Dbp\Relay\BaseOrganizationBundle\API\OrganizationsByPersonProviderInterface:
-    '@Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationsByPersonProvider'

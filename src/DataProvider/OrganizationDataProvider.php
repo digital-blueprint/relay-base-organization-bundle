@@ -13,8 +13,7 @@ use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
  */
 class OrganizationDataProvider extends AbstractDataProvider
 {
-    /** @var OrganizationProviderInterface */
-    private $organizationProvider;
+    private OrganizationProviderInterface $organizationProvider;
 
     public function __construct(OrganizationProviderInterface $organizationProvider)
     {

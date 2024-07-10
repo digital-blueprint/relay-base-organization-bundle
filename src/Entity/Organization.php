@@ -15,19 +15,13 @@ class Organization implements LocalDataAwareInterface, NamedEntityInterface
 
     public const SEARCH_PARAMETER_NAME = 'search';
 
-    /**
-     * @var string
-     */
     #[Groups(['BaseOrganization:output'])]
-    private $identifier;
+    private ?string $identifier = null;
 
-    /**
-     * @var string
-     */
     #[Groups(['BaseOrganization:output'])]
-    private $name;
+    private ?string $name = null;
 
-    public function setIdentifier(string $identifier): void
+    public function setIdentifier(?string $identifier): void
     {
         $this->identifier = $identifier;
     }
@@ -42,7 +36,7 @@ class Organization implements LocalDataAwareInterface, NamedEntityInterface
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
