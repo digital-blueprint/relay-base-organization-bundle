@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\Entity;
 
-use Dbp\Relay\CoreBundle\Entity\NamedEntityInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareInterface;
 use Dbp\Relay\CoreBundle\LocalData\LocalDataAwareTrait;
+use Dbp\Relay\CoreBundle\Rest\Entity\NamedEntityInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 class Organization implements LocalDataAwareInterface, NamedEntityInterface
