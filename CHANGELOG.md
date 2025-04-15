@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.14
+
+* Drop support for PHP 8.1
+* Drop support for Symfony 5.4
+* Drop support for Psalm
+* Add support for api-platform >=4.1, drop for <3.4
+
 ## v0.2.13
 
 * Port to PHPUnit 10
