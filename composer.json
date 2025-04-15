@@ -8,8 +8,9 @@
         "api-platform/core": "^3.4 || ^4.1",
         "dbp/relay-core-bundle": "^0.1.186",
         "symfony/config": "^6.4",
+        "symfony/dependency-injection": "^6.4",
         "symfony/http-kernel": "^6.4",
-        "symfony/dependency-injection": "^6.4"
+        "symfony/serializer": "^6.4"
     },
     "require-dev": {
         "captainhook/captainhook": "^5.25",
@@ -22,7 +23,8 @@
         "symfony/http-client": "^6.4",
         "symfony/monolog-bridge": "^6.4",
         "symfony/monolog-bundle": "^3.10",
-        "symfony/phpunit-bridge": "^6.4"
+        "symfony/phpunit-bridge": "^6.4",
+        "symfony/framework-bundle": "^6.4"
     },
     "autoload": {
         "psr-4": {
