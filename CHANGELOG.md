@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.15
+
+* OpenAPI fixes for api-platform 4.1
+
 ## v0.2.14
 
 * Drop support for PHP 8.1
