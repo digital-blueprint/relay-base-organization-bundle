@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\DependencyInjection;
 
+use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
 use Dbp\Relay\BaseOrganizationBundle\DataProvider\OrganizationDataProvider;
+use Dbp\Relay\BaseOrganizationBundle\Service\DummyOrganizationProvider;
 use Dbp\Relay\CoreBundle\Extension\ExtensionTrait;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class DbpRelayBaseOrganizationExtension extends ConfigurableExtension
@@ -19,11 +19,18 @@ class DbpRelayBaseOrganizationExtension extends ConfigurableExtension
     {
         $this->addResourceClassDirectory($container, __DIR__.'/../Entity');
 
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__.'/../Resources/config')
+        $container->register(OrganizationDataProvider::class)
+            ->setAutowired(true)
+            ->setAutoconfigured(true);
+
+        $container->register(DummyOrganizationProvider::class)
+            ->setAutowired(true)
+            ->setAutoconfigured(true);
+
+        $container->setAlias(
+            OrganizationProviderInterface::class,
+            DummyOrganizationProvider::class
         );
-        $loader->load('services.yaml');
 
         $defintion = $container->getDefinition(OrganizationDataProvider::class);
         $defintion->addMethodCall('setConfig', [$mergedConfig]);
