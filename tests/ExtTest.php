@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Dbp\Relay\BaseOrganizationBundle\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+use Dbp\Relay\CoreBundle\TestUtils\AbstractApiTest;
 use Dbp\Relay\CoreBundle\TestUtils\UserAuthTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-class ExtTest extends ApiTestCase
+class ExtTest extends AbstractApiTest
 {
     use UserAuthTrait;
 
