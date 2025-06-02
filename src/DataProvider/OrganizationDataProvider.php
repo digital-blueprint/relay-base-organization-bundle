@@ -13,18 +13,10 @@ use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
  */
 class OrganizationDataProvider extends AbstractDataProvider
 {
-    private OrganizationProviderInterface $organizationProvider;
-
-    public function __construct(OrganizationProviderInterface $organizationProvider)
+    public function __construct(
+        private readonly OrganizationProviderInterface $organizationProvider)
     {
         parent::__construct();
-
-        $this->organizationProvider = $organizationProvider;
-    }
-
-    protected function isUserGrantedOperationAccess(int $operation): bool
-    {
-        return $this->isAuthenticated();
     }
 
     protected function getItemById(string $id, array $filters = [], array $options = []): ?object
