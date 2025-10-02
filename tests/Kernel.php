@@ -46,5 +46,13 @@ class Kernel extends BaseKernel
             'secret' => '',
             'annotations' => false,
         ]);
+
+        $container->extension('dbp_relay_base_organization', [
+            'authorization' => [
+                'roles' => [
+                    'ROLE_READER' => 'user.get("MAY_READ")',
+                ],
+            ],
+        ]);
     }
 }

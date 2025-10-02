@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dbp\Relay\BaseOrganizationBundle\DataProvider;
 
 use Dbp\Relay\BaseOrganizationBundle\API\OrganizationProviderInterface;
+use Dbp\Relay\BaseOrganizationBundle\DependencyInjection\Configuration;
 use Dbp\Relay\BaseOrganizationBundle\Entity\Organization;
 use Dbp\Relay\CoreBundle\Rest\AbstractDataProvider;
 
@@ -31,5 +32,10 @@ class OrganizationDataProvider extends AbstractDataProvider
         }
 
         return $this->organizationProvider->getOrganizations($currentPageNumber, $maxNumItemsPerPage, $options);
+    }
+
+    protected function isCurrentUserGrantedOperationAccess(int $operation): bool
+    {
+        return $this->isGrantedRole(Configuration::ROLE_READER);
     }
 }
