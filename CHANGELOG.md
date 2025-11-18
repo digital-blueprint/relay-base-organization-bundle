@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## v0.2.17
+
+- Drop support for api-platform 3
+- Dependency cleanups
+
 ## v0.2.16
 
 - Add ROLE_READER, which is required for read operations
