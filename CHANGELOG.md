@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.18
+
+- Add support for Symfony 7.4
+
 ## v0.2.17
 
 - Drop support for api-platform 3
