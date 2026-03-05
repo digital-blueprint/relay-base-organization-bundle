@@ -32,6 +32,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         schema: ['type' => 'string'],
                         example: 'code',
                     ),
+                    new Parameter(
+                        name: 'preparedFilter',
+                        in: 'query',
+                        description: 'Prepared filter to apply',
+                        schema: ['type' => 'string'],
+                    ),
                 ]
             ),
             provider: OrganizationDataProvider::class
@@ -54,6 +60,36 @@ use Symfony\Component\Serializer\Annotation\Groups;
                         description: 'Local data attributes to include',
                         schema: ['type' => 'string'],
                         example: 'code',
+                    ),
+                    new Parameter(
+                        name: 'preparedFilter',
+                        in: 'query',
+                        description: 'Prepared filter to apply',
+                        schema: ['type' => 'string'],
+                    ),
+                    new Parameter(
+                        name: 'filter',
+                        in: 'query',
+                        schema: [
+                            'type' => 'object',
+                            'additionalProperties' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                        style: 'form',
+                        explode: true
+                    ),
+                    new Parameter(
+                        name: 'sort',
+                        in: 'query',
+                        schema: [
+                            'type' => 'object',
+                            'additionalProperties' => [
+                                'type' => 'string',
+                            ],
+                        ],
+                        style: 'form',
+                        explode: true
                     ),
                 ]
             ),

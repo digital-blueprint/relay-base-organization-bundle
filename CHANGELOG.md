@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Offer OpenAPI query parameters for filtering and sorting
+
 ## v0.2.18
 
 - Add support for Symfony 7.4
