@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v0.2.19
+
 - Offer OpenAPI query parameters for filtering and sorting
 
 ## v0.2.18
