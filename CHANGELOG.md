@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.2.20
+
+- Dependency updates
+
 ## v0.2.19
 
 - Offer OpenAPI query parameters for filtering and sorting
